@@ -1,37 +1,28 @@
-const BASE_URL = 'http://127.0.0.1:8000' // Or your deployed backend URL
+const BASE_URL = 'http://127.0.0.1:8001';
+const QUERY_URL = 'http://127.0.0.1:8002';
 
 const uploadFile = async (file) => {
-  const formData = new FormData()
-  formData.append('file', file)
+  const formData = new FormData();
+  formData.append('file', file);
 
   const res = await fetch(`${BASE_URL}/upload`, {
     method: 'POST',
-    body: formData
-  })
+    body: formData,
+  });
 
-  if (!res.ok) {
-    const errText = await res.text()
-    throw new Error('File upload failed: ' + errText)
-  }
+  if (!res.ok) throw new Error(await res.text());
+  return await res.json(); // { file_id: "...", message: "..." }
+};
 
-  return await res.json() // { message: "File processed" }
-}
-
-const askQuery = async (query) => {
-  const res = await fetch(`${BASE_URL}/query`, {
+const askQuery = async (query, fileKey) => {
+  const res = await fetch(`${QUERY_URL}/query`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ query }) // ✅ Backend expects { query: "..." }
-  })
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ query, file_key: fileKey }),
+  });
 
-  if (!res.ok) {
-    const errText = await res.text()
-    throw new Error('Query failed: ' + errText)
-  }
+  if (!res.ok) throw new Error(await res.text());
+  return await res.json();
+};
 
-  return await res.json() // { reply: "..." }
-}
-
-export default { uploadFile, askQuery }
+export default { uploadFile, askQuery };
