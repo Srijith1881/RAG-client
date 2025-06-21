@@ -1,12 +1,29 @@
-# React + Vite
+# 🧠 PDF RAG Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a React-based frontend application that allows users to upload a PDF file and interact with its contents using a chatbot interface powered by a RAG (Retrieval-Augmented Generation) system.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 📄 Upload PDF files
+- 💬 Ask questions based on the uploaded document
+- 🤖 Get AI-generated answers using document context
+- 🌗 Light/Dark theme toggle
+- 📈 Upload progress bar
+- ⏱️ Typewriter-style animated responses
+- 🧾 Chat history preserved during session
 
-## Expanding the ESLint configuration
+## 🧱 Architecture
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+This is a frontend-only app designed to interact with a backend RAG system. It expects the backend to provide two API endpoints:
+- `POST /upload` – Accepts a PDF file and returns a `file_id`.
+- `POST /query` – Accepts a question and a `file_id`, and returns an answer generated from the document context.
+
+## 🛠️ Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone
+npm i
+cd <folder>
+npm run dev
